@@ -9,7 +9,7 @@ router.post('/adduser', async(req, res) => {
         
         const {name, email, mobile, whatsapp_mobile, city, hometown, college, university, passing_year, branch, linkedinid, referredby, islaptop, mern_knowledge} = req.body;
         // console.log(req.body);
-        const userid = name.slice(0, 5) + parseInt(Math.random()*100000);
+        const userid = name.split(" ").join("").slice(0, 5) + parseInt(Math.random()*100000);
         let tempdate = new Date();
         const creationdate = tempdate.getDate()+'-'+tempdate.getMonth()+'-'+tempdate.getDay();
         const creationtime = tempdate.getHours()+'-'+tempdate.getMinutes()+'-'+tempdate.getSeconds();

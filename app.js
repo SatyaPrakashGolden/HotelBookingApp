@@ -12,12 +12,21 @@ app.use(cors({
     origin: '*'
 }));
 
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
+
 app.get('/', (req, res) => {
     try {
         console.log('JSCMS API is running.........');
         res.send('<h1>JSCMS API is running.........</h1>');
     }
-    catch{
+    catch {
 
     }
 })
@@ -32,10 +41,10 @@ app.use('/users', usersRoute);
 // app.use('/exams', examsRoute);
 
 
-app.listen(process.env.PORT || 4000, function() {
+app.listen(process.env.PORT || 4000, function () {
     console.log('App running on port 4000.');
-    db.connect(function(err) {
-        if(err) {
+    db.connect(function (err) {
+        if (err) {
             console.log('db connection error', err);
         }
     })
