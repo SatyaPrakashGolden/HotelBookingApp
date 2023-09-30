@@ -27,4 +27,15 @@ router.post('/adduser', async(req, res) => {
     }
 })
 
+// http://localhost:4000/users/allusers
+router.get('/allusers', async (req, res) => {
+    try{
+        const response = await db.promise().query(`select * from mern_oct_2023 where isactive = 1`);
+        res.status(201).json(response[0]);
+    }
+    catch{
+        res.status(400).json(err);
+    }
+});
+
 module.exports = router;
