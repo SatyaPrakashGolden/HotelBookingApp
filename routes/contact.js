@@ -8,7 +8,7 @@ const db = require('../db');
 router.get('/alluser', async(req,res) => {
     try{
         const response = await db.promise()
-        .query(`select name,email,subject,message from contact where isactive = 1`);
+        .query(`select * from contact where isactive = 1`);
         res.status(200).json(response[0]);
     }
     catch(err){
