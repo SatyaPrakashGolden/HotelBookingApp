@@ -1,31 +1,54 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../db');
+const db = require("../db");
 
 // http://localhost:4000/career/register
-router.post('/register', async(req, res) => {
-    console.log('Inside request');
-    try {
-        
-        const {name, email, mobile, whatsapp_mobile, city, hometown, college, university, passing_year, branch, linkedinid, referredby, islaptop, mern_knowledge} = req.body;
-        // console.log(req.body);
-        const userid = name.toLowerCase().split(" ").join("").slice(0, 5) + parseInt(Math.random()*100000);
-        let tempdate = new Date();
-        const creationdate = tempdate.getDate()+'-'+tempdate.getMonth()+'-'+tempdate.getDay();
-        const creationtime = tempdate.getHours()+'-'+tempdate.getMinutes()+'-'+tempdate.getSeconds();
-        const password = parseInt(Math.random()*10000000000);
+router.post("/register", async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      mobile,
+      whatsapp_mobile,
+      city,
+      hometown,
+      college,
+      university,
+      passing_year,
+      branch,
+      linkedinid,
+      githubid,
+      referredby,
+      currentcompany,
+      yearsOfExperience,
+      currentDesignation,
+      noticePeriod,
+      currentSalary,
+      skills,
+      dob,
+      workLocation,
+      typePartFull,
+      typeFullIntern,
+      jobType,
+    } = req.body;
+    //console.log(req.body);
+    const username = name.toLowerCase().split(" ").join("").slice(0, 5) + parseInt(Math.random() * 100000);
+    const regid = 'HB'+parseInt(Math.random() * 10000000000);
+    const password = parseInt(Math.random() * 10000000000);
 
-        const response = await db.promise().query(`INSERT INTO mern_oct_2023 (userid, name, email, mobile, whatsapp_mobile, city, hometown, college, university, passing_year, branch, creationdate, creationtime, password, linkedinid, referredby, islaptop, mern_knowledge ) VALUES ('${userid}','${name}',' ${email}','${mobile}', '${whatsapp_mobile}', '${city}', '${hometown}', '${college}', '${university}', '${passing_year}', '${branch}', '${creationdate}', '${creationtime}', '${password}', '${linkedinid}', '${referredby}', '${islaptop}', '${mern_knowledge}' )`);
-        
-        //const response2 = await db.promise().query(`SELECT userid FROM users WHERE username = '${req.body.username}' `);
-        // console.log(response, response2[0]);
-
-        res.status(201).json(response[0]);
-    } catch(err) {
-        console.log(err);
-        res.status(400).json(err);
-    }
-})
-
+    const response = await db.promise()
+      .query(`INSERT INTO career(regid,username,password,name,email,mobile,whatsapp_mobile,city,hometown,college,university,passing_year,branch,linkedinid,githubid,referredby,
+                currentcompany,yearsOfExperience,currentDesignation,noticePeriod,currentSalary,skills,dob,workLocation,typePartFull,
+                typeFullIntern,jobType)
+                VALUES('${regid}','${username}','${password}','${name}','${email}','${mobile}','${whatsapp_mobile}','${city}','${hometown}','${college}','${university}','${passing_year}','${branch}','${linkedinid}','${githubid}','${referredby}','${currentcompany}','${yearsOfExperience}','${currentDesignation}',
+                '${noticePeriod}','${currentSalary}','${skills}','${dob}','${workLocation}','${typePartFull}','${typeFullIntern}',
+                '${jobType}')`);
+    
+    //console.log(response[0]);
+    res.status(201).json(response[0]);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+});
 
 module.exports = router;
