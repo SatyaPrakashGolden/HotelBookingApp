@@ -2,6 +2,21 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
+
+
+// http://localhost:4000/career/alluser
+router.get('/alluser', async(req,res) => {
+  try{
+    const response = await db.promise()
+    .query(`select * from career
+    where isactive = 1`);
+    res.status(200).json(response[0]);
+  }
+  catch(err){
+    res.status(400).json({message: err});
+  }
+});
+
 // http://localhost:4000/career/register
 router.post("/register", async (req, res) => {
   try {
