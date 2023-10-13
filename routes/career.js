@@ -2,13 +2,13 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
+
+
 // http://localhost:4000/career/alluser
 router.get('/alluser', async(req,res) => {
   try{
     const response = await db.promise()
-    .query(`select name,email,mobile,whatsapp_mobile,city,hometown,college,university,passing_year,branch,
-    linkedinid,githubid,referredby,currentcompany,yearsOfExperience,currentDesignation,noticePeriod,currentSalary,
-    skills,dob,workLocation,typePartFull,typeFullIntern,jobType from career
+    .query(`select * from career
     where isactive = 1`);
     res.status(200).json(response[0]);
   }
