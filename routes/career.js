@@ -66,4 +66,33 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// http://localhost:4000/career/updatecareer
+
+router.put('/updatecareer', async(req,res) => {
+  try{
+    const {name,email,mobile,whatsapp_mobile,city,hometown,college,university,passing_year,branch,linkedinid,
+      githubid,referredby,currentcompany,yearsOfExperience,currentDesignation,noticePeriod,currentSalary,skills,
+      dob,workLocation,typePartFull,typeFullIntern,jobType,uploadCV}=req.body;
+    const response = await db.promise()
+    .query(`update career set name='${name}',email='${email}',mobile='${mobile}',whatsapp_mobile='${whatsapp_mobile}',
+    city='${city}',hometown='${hometown}',college='${college}',university='${university}',passing_year='${passing_year}',
+    branch='${branch}',linkedinid='${linkedinid}',githubid='${githubid}',referredby='${referredby}',
+    currentcompany='${currentcompany}',yearsOfExperience='${yearsOfExperience}',currentDesignation='${currentDesignation}',
+    noticePeriod='${noticePeriod}',currentSalary='${currentSalary}',skills='${skills}',dob='${dob}',
+    workLocation='${workLocation}',typePartFull='${typePartFull}',typeFullIntern='${typeFullIntern}',
+    jobType='${jobType}',uploadCV='${uploadCV}'
+    where srno = ${req.body.srno} `);
+    res.status(200).json(response[0]);
+  }
+  catch(err){
+    res.status(400).json({message:err});
+  }
+});
+
+
+
+
+
+
+
 module.exports = router;
