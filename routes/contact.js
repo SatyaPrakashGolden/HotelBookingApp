@@ -24,11 +24,11 @@ router.put('/updatecontact', async(req,res) => {
     try{
         //console.log(req.body.srno);
         const {name,email,subject,message,responseStatus,responseMessage,responseNextStep,
-        responseNextPerson,}=req.body;
+        responseNextPerson,finalStatus}=req.body;
         const response = await db.promise()
         .query(`update contact set name='${name}',email='${email}',subject='${subject}',message='${message}',
         responseStatus='${responseStatus}',responseMessage='${responseMessage}',responseNextStep='${responseNextStep}',
-        responseNextPerson='${responseNextPerson}'
+        responseNextPerson='${responseNextPerson}',finalStatus='${finalStatus}'
         where  srno = ${req.body.srno}`);
         res.status(400).json(response[0]);
     }
