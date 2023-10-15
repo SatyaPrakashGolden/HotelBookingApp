@@ -8,7 +8,7 @@ router.get('/fetchallcategories', async(req,res) => {
     try{
 
         const [response] = await db.promise()
-        .query(`select categorydisplayname 'Display Name',categoryname Name,count(*) Count from postcategory
+        .query(`select categorydisplayname displayname,categoryname name,count(*) count from postcategory
          group by categoryname`);
         res.status(200).json(response);
     }
