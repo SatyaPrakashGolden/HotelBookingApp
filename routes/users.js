@@ -33,7 +33,7 @@ router.get('/allusers', async (req, res) => {
         const response = await db.promise().query(`select * from mern_oct_2023 where isactive = 1`);
         res.status(201).json(response[0]);
     }
-    catch{
+    catch(err){
         res.status(400).json(err);
     }
 });

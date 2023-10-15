@@ -32,6 +32,28 @@ router.get('/fetchblogdetail/:blogid', async(req,res) => {
     }
 });
 
+// http://localhost:4000/blog/recentblogs
+router.get('/recentblogs/', async(req,res) => {
+    try{
+        const response = await db.promise().query(`select * from posts ORDER BY srno DESC LIMIT 5`);
+        res.status(200).json(response[0]);
+    }
+    catch(err){
+        res.status(400).json({message: err});
+    }
+});
 
+// http://localhost:4000/blog/categoryblogs/ai
+router.get('/categoryblogs/:categoryname', async(req,res) => {
+    const categoryname = req.params.categoryname;
+    console.log(categoryname);
+    try{
+        const response = await db.promise().query(`select * from posts where category = ${categoryname} ORDER BY srno DESC `);
+        res.status(200).json(response[0]);
+    }
+    catch(err){
+        res.status(400).json({message: err});
+    }
+});
 
 module.exports = router;
