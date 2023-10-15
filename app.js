@@ -42,6 +42,8 @@ app.use('/contact', contactRoute);
 const blogRoute = require('./routes/blog');
 app.use('/blog', blogRoute);
 
+const categoryRoute = require('./routes/category');
+app.use('/category', categoryRoute);
 
 app.listen(process.env.PORT || 4000, function () {
     console.log('App running on port 4000.');
