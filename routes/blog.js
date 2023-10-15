@@ -48,7 +48,7 @@ router.get('/categoryblogs/:categoryname', async(req,res) => {
     const categoryname = req.params.categoryname;
     console.log(categoryname);
     try{
-        const response = await db.promise().query(`select * from posts where category = ${categoryname} ORDER BY srno DESC `);
+        const response = await db.promise().query(`select * from posts where category = '${categoryname}' ORDER BY srno DESC `);
         res.status(200).json(response[0]);
     }
     catch(err){
