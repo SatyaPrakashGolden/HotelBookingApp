@@ -60,7 +60,7 @@ router.post("/register", async (req, res) => {
                 '${jobType}')`);
     
     //console.log(response[0]);
-    res.status(201).json(response[0]);
+    res.status(200).json(response[0]);
   } catch (err) {
     res.status(400).json({ message: err });
   }
