@@ -42,7 +42,7 @@ router.put('/updatecontact', async(req,res) => {
         responseStatus='${responseStatus}',responseMessage='${responseMessage}',responseNextStep='${responseNextStep}',
         responseNextPerson='${responseNextPerson}',finalStatus='${finalStatus}'
         where  srno = ${req.body.srno}`);
-        res.status(400).json(response[0]);
+        res.status(200).json(response[0]);
     }
     catch(err){
         res.status(400).json({message: err});
