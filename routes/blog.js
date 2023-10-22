@@ -25,7 +25,12 @@ router.get('/fetchblogdetail/:blogid', async(req,res) => {
     const blogid = req.params.blogid;
     try{
         const response = await db.promise().query(`select * from posts WHERE postid = ${blogid}`);
-        res.status(200).json(response[0]);
+        const response2 = await db.promise().query(`select * from postcontent WHERE postid = ${blogid} ORDER BY postlocationid ASC`);
+        let finalObj = {
+            blog: response[0][0],
+            blogcontent: response2[0]
+        }
+        res.status(200).json(finalObj);
     }
     catch(err){
         res.status(400).json({message: err});
