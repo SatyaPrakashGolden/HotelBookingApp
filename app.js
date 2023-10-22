@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require("dotenv").config({ path: ".env" });
+const path = require("path")
 
 const db = require('./db');
 
@@ -44,6 +45,17 @@ app.use('/blog', blogRoute);
 
 const categoryRoute = require('./routes/category');
 app.use('/category', categoryRoute);
+
+const imagesRoute = require('./routes/images');
+app.use('/images', imagesRoute);
+
+// View Engine Setup 
+app.set("views", path.join(__dirname, "views"))
+app.set("view engine", "ejs")
+
+app.get("/file", function (req, res) {
+    res.render("Files");
+})
 
 app.listen(process.env.PORT || 4000, function () {
     console.log('App running on port 4000.');
